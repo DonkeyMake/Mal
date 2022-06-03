@@ -1,0 +1,32 @@
+using NUnit.Framework;
+
+namespace SolucionDelReves
+{
+    public class Tests//No apunto más, que los tantos se los llevan.
+    {
+
+        [SetUp]
+        public void MeDejanEmpezar(uint PayTime) {
+
+        }
+
+        uint baseTimePay;
+        public void BaseTimePay(uint PayTime) {
+
+        }
+
+        uint baseWorkPay;
+        public void WorkPayment(uint PayTime) {
+            
+        }
+
+        public void Transfer(uint PayTime) {
+
+        }
+
+    }
+
+    public class GolfIt {
+        uint PayTime;
+    }
+}
