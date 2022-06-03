@@ -1,0 +1,25 @@
+pragma solidity 0.8.13;
+// SPDX-License-Identifier: MIT
+
+import "./GlobalUAI.sol";
+contract GlobalKTS is GlobalUAI {
+    constructor()  { }
+
+    function KTSPayLogin(address contractAt, string calldata AI, string memory morocco, uint amount) public isManager(contractAt) returns(bool) {
+    require(Contracts[contractAt].hashPayd[morocco] == false, "Already payd");
+    uint storaged = amount;
+    Contracts[contractAt].AI_KTS[AI] += storaged;
+    Contracts[contractAt].hashPayd[morocco] = true; return true;  }
+
+
+    modifier canSpend(address contractAt, string calldata AI, uint amount) {
+        require(Contracts[contractAt].AI_KTS[AI] >= amount, "Warning: You have not enougth Koints"); _; }
+         
+        function KTSpend(address contractAt, string calldata AI, address userAddr, uint spendAmount) external isManager(contractAt) canSpend(contractAt, AI, spendAmount)  returns(uint){
+        require(_AILogin(AI, userAddr), "Security warning: This Account is not owned by this address");
+        Contracts[contractAt].AI_KTS[AI] -= spendAmount;
+        return(spendAmount);  }
+
+         function KTSBalance(address contractAt, string calldata AI) public view returns(uint){
+         return(Contracts[contractAt].AI_KTS[AI]);  }
+}
